@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/deekshu-hub/myfiles'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("prt-ci-image")
+                }
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                script {
+                    sh 'docker run --rm prt-ci-image'
+                }
+            }
+        }
+    }
+}
