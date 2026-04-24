@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("prt-ci-image")
-                }
+                sh 'docker build -t prt-ci-image .'
             }
         }
 
