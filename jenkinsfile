@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("prt-ci-image")
+                }
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker run --rm prt-ci-image'
+            }
+        }
+    }
+}
